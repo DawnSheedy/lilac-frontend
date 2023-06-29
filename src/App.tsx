@@ -3,6 +3,7 @@ import { Card } from "./layout/Card";
 import { Header } from "./layout/Header";
 import { DiscordCallback } from "./pages/discordCallback";
 import { Home } from "./pages/home";
+import { Dashboard } from "./pages/dashboard";
 
 /**
  * App entrypoint
@@ -19,6 +20,7 @@ function App() {
             element={<DiscordCallback />}
           />
           <Route path="/" element={<Home />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </div>
     </div>
