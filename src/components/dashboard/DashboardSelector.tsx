@@ -11,7 +11,7 @@ export const DashboardSelector = () => {
   const location = useLocation();
 
   return (
-    <div className="flex-none h-full w-[300px] bg-gradient-to-r from-transparent to-pink-900/20 border-r border-pink-800 p-4 pt-[6rem]">
+    <div className="flex-none h-full w-[300px] bg-gradient-to-r from-transparent to-pink-900/20 border-r border-pink-800 p-4 pt-[6rem] max-h-screen overflow-scroll">
       <div className="flex flex-col gap-4">
         <button
           className="text-lg font-semibold text-left"

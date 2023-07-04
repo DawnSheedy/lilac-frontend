@@ -14,7 +14,7 @@ export const serversApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Server", 'PluginClient'],
+  tagTypes: ["Server", "PluginClient"],
   endpoints: (builder) => ({
     getServers: builder.query<DiscordServer[], void>({
       query: () => `/`,
@@ -36,9 +36,24 @@ export const serversApi = createApi({
         baseValue === null
           ? null
           : { ...baseValue, lastPing: new Date(baseValue.lastPing) },
-      providesTags: (response) => [{ id: response?.id ?? 'Null', type: 'PluginClient' }]
+      providesTags: (response) => [{ id: "LIST", type: "PluginClient" }],
+    }),
+    setPluginClientName: builder.mutation<
+      { name: string },
+      { server: DiscordServer; name: string }
+    >({
+      query: (arg) => ({
+        url: `/${arg.server.id}/minecraft-client/`,
+        body: { name: arg.name },
+        method: "POST",
+      }),
+      invalidatesTags: [{ id: "LIST", type: "PluginClient" }],
     }),
   }),
 });
 
-export const { useGetServersQuery, useGetPluginClientQuery } = serversApi;
+export const {
+  useGetServersQuery,
+  useGetPluginClientQuery,
+  useSetPluginClientNameMutation,
+} = serversApi;
