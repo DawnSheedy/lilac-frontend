@@ -3,14 +3,18 @@ import { authApi } from "./api/authApi";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import sessionSlice from "./slices/sessionSlice";
 import { saveState } from "../utils/sessionStorage";
+import { serversApi } from "./api/serversApi";
+import interfaceSlice from "./slices/interfaceSlice";
 
 export const store = configureStore({
   reducer: {
     [authApi.reducerPath]: authApi.reducer,
+    [serversApi.reducerPath]: serversApi.reducer,
     session: sessionSlice,
+    interface: interfaceSlice,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(authApi.middleware),
+    getDefaultMiddleware().concat(authApi.middleware, serversApi.middleware),
 });
 
 setupListeners(store.dispatch);

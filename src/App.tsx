@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { Card } from "./layout/Card";
 import { Header } from "./layout/Header";
 import { DiscordCallback } from "./pages/discordCallback";
@@ -10,17 +10,19 @@ import { Dashboard } from "./pages/dashboard";
  * @returns
  */
 function App() {
+  const location = useLocation()
+  
   return (
-    <div className="bg-zinc-900 h-screen w-screen pt-[6rem]">
+    <div className="bg-zinc-900 h-screen w-screen text-slate-200">
       <Header />
-      <div className="container mx-auto">
+      <div className={location.pathname.startsWith("/dashboard") ? "h-full" : "container mx-auto pt-[6rem]"}>
         <Routes>
           <Route
             path="/authenticate/discord-callback"
             element={<DiscordCallback />}
           />
           <Route path="/" element={<Home />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard/*" element={<Dashboard />} />
         </Routes>
       </div>
     </div>

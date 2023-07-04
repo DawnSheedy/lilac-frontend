@@ -29,15 +29,16 @@ export const AuthView = () => {
         )}
       {user && (
         <div className="flex gap-4 items-center relative">
-          <div
+          {!user.avatarUrl && <div
             className={`blur-3xl w-[175px] opacity-30 h-[100px] right-[-1rem] absolute rounded-full -z-30`}
             style={{
               backgroundColor: `#${user.color?.toString(16) ?? "FF0000"}`,
             }}
-          ></div>
+          ></div>}
+          {user.avatarUrl && <img src={user.avatarUrl} className="blur-xl w-[175px] opacity-50 h-[100px] right-[0rem] absolute rounded-full -z-30"></img>}
           <div>
-            <div className="text-slate-200">Hi, {user.displayName}</div>
-            <div className="text-slate-500 text-xs text-right">
+            <div className="text-slate-200 drop-shadow-sm">Hi, {user.displayName}</div>
+            <div className="text-slate-400 text-xs text-right drop-shadow-sm">
               @{user.userName}
             </div>
           </div>
